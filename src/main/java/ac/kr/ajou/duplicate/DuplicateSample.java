@@ -17,4 +17,18 @@ public class DuplicateSample {
 
         return 0;
     }
+
+    public void lombokBuilder() {
+        EventData event = EventData.builder()
+                .eventName("abc")
+                .price(2)
+                .Test("TestTest").build();
+    }
+
+    public boolean lombokBuilder(String parameter)
+    {
+        if(parameter.equals("a")) return true;
+        return false;
+    }
+
 }
