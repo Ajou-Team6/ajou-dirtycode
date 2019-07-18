@@ -2,20 +2,22 @@ package ac.kr.ajou.duplicate;
 
 public class DuplicateSample {
 
-    public int calc(EventData ed) {
-        if (ed.getPrice() > 10) {
-            System.out.println(ed.getPrice());
-            System.out.println(ed.getEventName());
+    public int calc(EventData eventData) {
+        if (eventData.getPrice() > 10) {
+            logPriceAndName(eventData);
             return 1;
-        }  else {
-            if (ed.getEventName().equals("test")) {
-                System.out.println(ed.getPrice());
-                System.out.println(ed.getEventName());
-                return 2;
-            }
+        }
+        if (eventData.getEventName().equals("test")) {
+            logPriceAndName(eventData);
+            return 2;
         }
 
         return 0;
+    }
+
+    public void logPriceAndName(EventData eventData) {
+        System.out.println(eventData.getPrice());
+        System.out.println(eventData.getEventName());
     }
 
     public void lombokBuilder() {
@@ -25,9 +27,8 @@ public class DuplicateSample {
                 .Test("TestTest").build();
     }
 
-    public boolean lombokBuilder(String parameter)
-    {
-        if(parameter.equals("a")) return true;
+    public boolean lombokBuilder(String parameter) {
+        if (parameter.equals("a")) return true;
         return false;
     }
 
