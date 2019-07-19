@@ -27,13 +27,8 @@ public class DirtySampleTest {
     public void 아이템_이름이_셋다아니고_quality가0보다크고_sellin이_0보다클때_N번반복() {
         int initialQuality = 10;
         int initialSellin = 10;
-        Item[] items = { Item.builder()
-                .name(NotThreeDefault)
-                .quality(initialQuality)
-                .sellIn(initialSellin)
-                .build() };
+        Item[] items = makeNewItemLists(initialQuality, initialSellin, NotThreeDefault);
         DirtySample dirtySample = new DirtySample(items);
-
         // Step Check
         for(int loop = 1; loop <= loopFifty; loop++)
         {
@@ -50,13 +45,8 @@ public class DirtySampleTest {
     public void 아이템_이름이_셋다아니고_quality가0보다크고_sellin이_0보다작을때_N번반복() {
         int initialQuality = 20;
         int initialSellin = -10;
-        Item[] items = { Item.builder()
-                .name(NotThreeDefault)
-                .quality(initialQuality)
-                .sellIn(initialSellin)
-                .build() };
+        Item[] items = makeNewItemLists(initialQuality, initialSellin, NotThreeDefault);
         DirtySample dirtySample = new DirtySample(items);
-
         // Step Check
         for(int loop = 1; loop <= loopTen; loop++)
         {
@@ -73,13 +63,8 @@ public class DirtySampleTest {
     public void 아이템_이름이_AgedBrie이고_quality가50보다작고_sellin이_0보다클때_N번반복() {
         int initialQuality = 33;
         int initialSellin = 10;
-        Item[] items = { Item.builder()
-        .name(AgedBrie)
-        .quality(initialQuality)
-        .sellIn(initialSellin)
-        .build() };
+        Item[] items = makeNewItemLists(initialQuality, initialSellin, AgedBrie);
         DirtySample dirtySample = new DirtySample(items);
-
         // Step Check
         int check = initialQuality;
        for(int loop = 1; loop <= loopFifty; loop++)
@@ -107,13 +92,8 @@ public class DirtySampleTest {
     public void 아이템_이름이_AgedBrie이고_quality가50보다작고_sellin이_0보다작을때_N번반복() {
         int initialQuality = 33;
         int initialSellin = -5;
-        Item[] items = { Item.builder()
-                .name(AgedBrie)
-                .quality(initialQuality)
-                .sellIn(initialSellin)
-                .build() };
+        Item[] items = makeNewItemLists(initialQuality, initialSellin, AgedBrie);
         DirtySample dirtySample = new DirtySample(items);
-
         // Step Check
         for(int loop = 1; loop <= loopFifty; loop++)
         {
@@ -130,13 +110,8 @@ public class DirtySampleTest {
     public void 아이템_이름이_AgedBrie이고_quality가50보다클때_N번반복() {
         int initialQuality = 55;
         int initialSellin = -5;
-        Item[] items = { Item.builder()
-                .name(AgedBrie)
-                .quality(initialQuality)
-                .sellIn(initialSellin)
-                .build() };
+        Item[] items = makeNewItemLists(initialQuality, initialSellin, AgedBrie);
         DirtySample dirtySample = new DirtySample(items);
-
         // Step Check
         for(int loop = 1; loop <= loopFifty; loop++)
         {
@@ -152,11 +127,7 @@ public class DirtySampleTest {
     public void 아이템_이름이_Backstage이고_quality가50보다작고_Sellin이11보다클때_50번반복() {
         int initialQuality = 40;
         int initialSellin = 20;
-        Item[] items = { Item.builder()
-                .name(BackStage)
-                .quality(initialQuality)
-                .sellIn(initialSellin)
-                .build() };
+        Item[] items = makeNewItemLists(initialQuality, initialSellin, BackStage);
         DirtySample dirtySample = new DirtySample(items);
         // Step Check
         int check = initialQuality;
@@ -175,11 +146,7 @@ public class DirtySampleTest {
     public void 아이템_이름이_Backstage이고_quality가50보다클때_50번반복() {
         int initialQuality = 100;
         int initialSellin = 20;
-        Item[] items = { Item.builder()
-                .name(BackStage)
-                .quality(initialQuality)
-                .sellIn(initialSellin)
-                .build() };
+        Item[] items = makeNewItemLists(initialQuality, initialSellin, BackStage);
         DirtySample dirtySample = new DirtySample(items);
         // Step Check
         int check = initialQuality;
@@ -208,11 +175,7 @@ public class DirtySampleTest {
     public void 아이템_이름이_Sulfuras일때_N번반복() {
         int initialQuality = 50;
         int initialSellin = 20;
-        Item[] items = { Item.builder()
-                .name(Sulfuras)
-                .quality(initialQuality)
-                .sellIn(initialSellin)
-                .build() };
+        Item[] items = makeNewItemLists(initialQuality, initialSellin, Sulfuras);
         DirtySample dirtySample = new DirtySample(items);
         // Step Check
         for(int loop = 1; loop <= loopFifty; loop++)
@@ -223,6 +186,14 @@ public class DirtySampleTest {
         // Result Check
         assertThat(items[0].getQuality(),equalTo(initialQuality));
         assertThat(items[0].getSellIn(),is(initialSellin));
+    }
+
+    private Item[] makeNewItemLists(int initialQuality, int initialSellin, String initialName) {
+        return new Item[]{Item.builder()
+                .name(initialName)
+                .quality(initialQuality)
+                .sellIn(initialSellin)
+                .build()};
     }
 
 }
