@@ -25,7 +25,9 @@ class DirtySample {
                 doIfNameisAgedBrieOrBackStage(items[i]);
             }
             isItemNameSulfurasThenMinusSellinOne(items[i]);
-            doIfSellinisUnderZero(items[i]);
+            if (items[i].sellIn < 0) {
+                doIfSellinisUnderZero(items[i]);
+            }
         }
     }
 
@@ -36,40 +38,28 @@ class DirtySample {
     }
 
     private void doIfNameisAgedBrieOrBackStage(Item item) {
-        if (checkIfQualityIsUnderPreDefinedMax(item)) {
-            item.quality = item.quality + 1;
-
-            if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                if (item.sellIn < 11) {
-                    checkQualityUnderFiftyAndAddOne(item);
-                }
-
-                if (item.sellIn < 6) {
-                    checkQualityUnderFiftyAndAddOne(item);
-                }
-            }
+        if(isItemNameBackstageAndSellinUnderWhat(item, 6)) {
+            checkQualityUnderFiftyAndAddSome(item, 3);
+            return;
         }
+        else if(isItemNameBackstageAndSellinUnderWhat(item, 11)) {
+            checkQualityUnderFiftyAndAddSome(item, 2);
+            return;
+        }
+        checkQualityUnderFiftyAndAddSome(item, 1);
     }
 
-    private boolean checkIfQualityIsUnderPreDefinedMax(Item item) {
-        return item.quality < 50;
+    private boolean isItemNameBackstageAndSellinUnderWhat(Item item, int threshold) {
+        return item.name.equals("Backstage passes to a TAFKAL80ETC concert") && item.sellIn < threshold;
     }
 
     private void doIfSellinisUnderZero(Item item) {
-        if (item.sellIn < 0) {
-            if (!item.name.equals("Aged Brie")) {
-                if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                    if (item.quality > 0) {
-                        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                            item.quality = item.quality - 1;
-                        }
-                    }
-                } else {
-                    item.quality = item.quality - item.quality;
-                }
-            } else {
-                checkQualityUnderFiftyAndAddOne(item);
-            }
+        if (item.name.equals("Aged Brie")) {
+            checkQualityUnderFiftyAndAddSome(item, 1);
+        } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            item.quality = 0;
+        } else if (!item.name.equals("Sulfuras, Hand of Ragnaros") && item.quality > 0) {
+            item.quality = item.quality - 1;
         }
     }
 
@@ -84,9 +74,13 @@ class DirtySample {
                 && !item.name.equals("Backstage passes to a TAFKAL80ETC concert");
     }
 
-    private void checkQualityUnderFiftyAndAddOne(Item item) {
+    private void checkQualityUnderFiftyAndAddSome(Item item, int addWhat) {
         if (checkIfQualityIsUnderPreDefinedMax(item)) {
-            item.quality = item.quality + 1;
+            item.quality = item.quality + addWhat;
         }
+    }
+
+    private boolean checkIfQualityIsUnderPreDefinedMax(Item item) {
+        return item.quality < 50;
     }
 }
