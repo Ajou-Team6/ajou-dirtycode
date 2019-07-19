@@ -15,50 +15,50 @@ class DirtySample {
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
             if (!items[i].name.equals("Aged Brie")
-                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) { // Item 이름이 Aged Brie가 아니고, 이상한 문구가 아니면
-                if (items[i].quality > 0) {                                                  // item quality가 0보다 크면
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {               // item 이름이 sulfuras, hand of ragnaros가 아니면
-                        items[i].quality = items[i].quality - 1;                             // 아이템 quality를 1 제거
+                    && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (items[i].quality > 0) {
+                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                        items[i].quality = items[i].quality - 1;
                     }
                 }
-            } else {                                                                          // Item 이름이 Aged Brie이거나, 이상한 문구이면
-                if (items[i].quality < 50) {                                                  // Item quality가 50보다 작으면,
-                    items[i].quality = items[i].quality + 1;                                  // item quality 1 증가
+            } else {
+                if (items[i].quality < 50) {
+                    items[i].quality = items[i].quality + 1;
 
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {  // item 이름이 이상한 문구이면
-                        if (items[i].sellIn < 11) {                                           // item sellin이 11보다 작고,
-                            if (items[i].quality < 50) {                                      // item quality가 50보다 작으면,
-                                items[i].quality = items[i].quality + 1;                      // item quality 1 증가
+                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                        if (items[i].sellIn < 11) {
+                            if (items[i].quality < 50) {
+                                items[i].quality = items[i].quality + 1;
                             }
                         }
 
-                        if (items[i].sellIn < 6) {                                              // Item 이름이 이상한 문구이고
-                            if (items[i].quality < 50) {                                        // sellin이 6보다 작고, quality가 50보다 작으면
-                                items[i].quality = items[i].quality + 1;                        // quality 1 증가
+                        if (items[i].sellIn < 6) {
+                            if (items[i].quality < 50) {
+                                items[i].quality = items[i].quality + 1;
                             }
                         }
                     }
                 }
             }
 
-            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {                          // item 이름이 sulfuras, hand of ragnaros가 아니면
-                items[i].sellIn = items[i].sellIn - 1;                                          // sellin 1 제거
+            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                items[i].sellIn = items[i].sellIn - 1;
             }
 
-            if (items[i].sellIn < 0) {                                                          // item sellin이 0보다 작고,
-                if (!items[i].name.equals("Aged Brie")) {                                       // item 이름이 aged brie가 아니고,
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {   // item 이름이 이상한 문구가 아니고
-                        if (items[i].quality > 0) {                                             // quality가 0보다 크고
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {          // item 이름이 sulfuras, hand of ragnaros가 아니면
-                                items[i].quality = items[i].quality - 1;                        // 아이템 quality 1 감소
+            if (items[i].sellIn < 0) {
+                if (!items[i].name.equals("Aged Brie")) {
+                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                        if (items[i].quality > 0) {
+                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
+                                items[i].quality = items[i].quality - 1;
                             }
                         }
-                    } else {                                                                     // 아이템 이름이 이상한 문구이면
-                        items[i].quality = items[i].quality - items[i].quality;                 // item quality는 0이된다.
+                    } else {
+                        items[i].quality = items[i].quality - items[i].quality;
                     }
-                } else {                                                                        // 아이템 이름이 aged brie이면,
-                    if (items[i].quality < 50) {                                                // quality가 50보다 작으면
-                        items[i].quality = items[i].quality + 1;                                // quality 1 증가
+                } else {
+                    if (items[i].quality < 50) {
+                        items[i].quality = items[i].quality + 1;
                     }
                 }
             }
