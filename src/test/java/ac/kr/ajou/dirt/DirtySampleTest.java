@@ -28,7 +28,7 @@ public class DirtySampleTest {
         int initialQuality = 10;
         int initialSellin = 10;
         Item[] items = makeNewItemLists(initialQuality, initialSellin, NotThreeDefault);
-        DirtySample dirtySample = new DirtySample(items);
+        DirtySample dirtySample = DirtySample.builder().items(items).build();
         // Step Check
         for(int loop = 1; loop <= loopFifty; loop++)
         {
@@ -46,7 +46,7 @@ public class DirtySampleTest {
         int initialQuality = 20;
         int initialSellin = -10;
         Item[] items = makeNewItemLists(initialQuality, initialSellin, NotThreeDefault);
-        DirtySample dirtySample = new DirtySample(items);
+        DirtySample dirtySample = DirtySample.builder().items(items).build();
         // Step Check
         for(int loop = 1; loop <= loopTen; loop++)
         {
@@ -64,7 +64,7 @@ public class DirtySampleTest {
         int initialQuality = 33;
         int initialSellin = 10;
         Item[] items = makeNewItemLists(initialQuality, initialSellin, AgedBrie);
-        DirtySample dirtySample = new DirtySample(items);
+        DirtySample dirtySample = DirtySample.builder().items(items).build();
         // Step Check
         int check = initialQuality;
        for(int loop = 1; loop <= loopFifty; loop++)
@@ -93,7 +93,7 @@ public class DirtySampleTest {
         int initialQuality = 33;
         int initialSellin = -5;
         Item[] items = makeNewItemLists(initialQuality, initialSellin, AgedBrie);
-        DirtySample dirtySample = new DirtySample(items);
+        DirtySample dirtySample = DirtySample.builder().items(items).build();
         // Step Check
         for(int loop = 1; loop <= loopFifty; loop++)
         {
@@ -111,7 +111,7 @@ public class DirtySampleTest {
         int initialQuality = 55;
         int initialSellin = -5;
         Item[] items = makeNewItemLists(initialQuality, initialSellin, AgedBrie);
-        DirtySample dirtySample = new DirtySample(items);
+        DirtySample dirtySample = DirtySample.builder().items(items).build();
         // Step Check
         for(int loop = 1; loop <= loopFifty; loop++)
         {
@@ -128,7 +128,7 @@ public class DirtySampleTest {
         int initialQuality = 40;
         int initialSellin = 20;
         Item[] items = makeNewItemLists(initialQuality, initialSellin, BackStage);
-        DirtySample dirtySample = new DirtySample(items);
+        DirtySample dirtySample = DirtySample.builder().items(items).build();
         // Step Check
         int check = initialQuality;
         for(int loop = 1; loop <= loopFifty; loop++)
@@ -147,7 +147,7 @@ public class DirtySampleTest {
         int initialQuality = 100;
         int initialSellin = 20;
         Item[] items = makeNewItemLists(initialQuality, initialSellin, BackStage);
-        DirtySample dirtySample = new DirtySample(items);
+        DirtySample dirtySample = DirtySample.builder().items(items).build();
         // Step Check
         int check = initialQuality;
         for(int loop = 1; loop <= loopFifty; loop++)
@@ -176,7 +176,7 @@ public class DirtySampleTest {
         int initialQuality = 50;
         int initialSellin = 20;
         Item[] items = makeNewItemLists(initialQuality, initialSellin, Sulfuras);
-        DirtySample dirtySample = new DirtySample(items);
+        DirtySample dirtySample = DirtySample.builder().items(items).build();
         // Step Check
         for(int loop = 1; loop <= loopFifty; loop++)
         {
