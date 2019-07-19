@@ -38,11 +38,10 @@ class DirtySample {
     }
 
     private void doIfNameisAgedBrieOrBackStage(Item item) {
-        if(isItemNameBackstageAndSellinUnderWhat(item, 6)) {
+        if (isItemNameBackstageAndSellinUnderWhat(item, 6)) {
             checkQualityUnderFiftyAndAddSome(item, 3);
             return;
-        }
-        else if(isItemNameBackstageAndSellinUnderWhat(item, 11)) {
+        } else if (isItemNameBackstageAndSellinUnderWhat(item, 11)) {
             checkQualityUnderFiftyAndAddSome(item, 2);
             return;
         }
