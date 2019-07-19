@@ -12,7 +12,7 @@ class DirtySample {
         this.items = items;
     }
 
-//    1. "Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros" 가 아니고, quality가 0보다 크면 quality 1 제거. sellin 1 감소 + Sellin이 0보다 작으면 quality 1 추가 제거.
+    //    1. "Aged Brie", "Backstage passes to a TAFKAL80ETC concert", "Sulfuras, Hand of Ragnaros" 가 아니고, quality가 0보다 크면 quality 1 제거. sellin 1 감소 + Sellin이 0보다 작으면 quality 1 추가 제거.
 //    2. "Aged Brie"이고, quality가 50보다 작으면, quality 1 증가, sellin 1 제거. + Sellin이 0보다 작으면, quality 1 추가 증가. (quality는 최대 50)
 //    3. "Backstage passes to a TAFKAL80ETC concert"이고, quality가 50보다 작으면 quality 1 증가, sellin이 11보다 작으면 quality 추가로 1 증가,  6보다 작으면 추가로 1 증가, sellin 1 감소 + sellin이 0보다 작으면 quality = 0
 //    4. "Sulfuras, Hand of Ragnaros"이면, 이무것도 수행하지 않는다.
@@ -20,43 +20,55 @@ class DirtySample {
     public void updateQuality() {
         for (int i = 0; i < items.length; i++) {
             if (isNotAgedBrieOrBackstage(items[i])) {
-                if (items[i].quality > 0) {
-                    if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        items[i].quality = items[i].quality - 1;
-                    }
-                }
+                doIfItemNameisNotThreeDefaultAndQualityIsOverZero(items[i]);
             } else {
-                if (items[i].quality < 50) {
-                    items[i].quality = items[i].quality + 1;
+                doIfNameisAgedBrieOrBackStage(items[i]);
+            }
+            isItemNameSulfurasThenMinusSellinOne(items[i]);
+            doIfSellinisUnderZero(items[i]);
+        }
+    }
 
-                    if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].sellIn < 11) {
-                            checkQualityUnderFiftyAndAddOne(items[i]);
-                        }
+    private void doIfItemNameisNotThreeDefaultAndQualityIsOverZero(Item item) {
+        if (item.quality > 0 && !item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            item.quality = item.quality - 1;
+        }
+    }
 
-                        if (items[i].sellIn < 6) {
-                            checkQualityUnderFiftyAndAddOne(items[i]);
-                        }
-                    }
+    private void doIfNameisAgedBrieOrBackStage(Item item) {
+        if (checkIfQualityIsUnderPreDefinedMax(item)) {
+            item.quality = item.quality + 1;
+
+            if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (item.sellIn < 11) {
+                    checkQualityUnderFiftyAndAddOne(item);
+                }
+
+                if (item.sellIn < 6) {
+                    checkQualityUnderFiftyAndAddOne(item);
                 }
             }
+        }
+    }
 
-            isItemNameSulfurasThenMinusSellinOne(items[i]);
+    private boolean checkIfQualityIsUnderPreDefinedMax(Item item) {
+        return item.quality < 50;
+    }
 
-            if (items[i].sellIn < 0) {
-                if (!items[i].name.equals("Aged Brie")) {
-                    if (!items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (items[i].quality > 0) {
-                            if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                                items[i].quality = items[i].quality - 1;
-                            }
+    private void doIfSellinisUnderZero(Item item) {
+        if (item.sellIn < 0) {
+            if (!item.name.equals("Aged Brie")) {
+                if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                    if (item.quality > 0) {
+                        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+                            item.quality = item.quality - 1;
                         }
-                    } else {
-                        items[i].quality = items[i].quality - items[i].quality;
                     }
                 } else {
-                    checkQualityUnderFiftyAndAddOne(items[i]);
+                    item.quality = item.quality - item.quality;
                 }
+            } else {
+                checkQualityUnderFiftyAndAddOne(item);
             }
         }
     }
@@ -73,7 +85,7 @@ class DirtySample {
     }
 
     private void checkQualityUnderFiftyAndAddOne(Item item) {
-        if (item.quality < 50) {
+        if (checkIfQualityIsUnderPreDefinedMax(item)) {
             item.quality = item.quality + 1;
         }
     }
