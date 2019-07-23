@@ -1,5 +1,10 @@
 package ac.kr.ajou.dirt;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 class DirtySample {
     Item[] items;
 
