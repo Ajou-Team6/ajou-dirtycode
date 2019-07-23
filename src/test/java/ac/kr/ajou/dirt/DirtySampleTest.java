@@ -24,7 +24,7 @@ public class DirtySampleTest {
 
 
     @Test
-    public void 아이템이름이_세개_모두_아니고_item_Quality와Sellin_모두_0이상일때_감소() {
+    public void 아이템이름이_세개_모두_아니고_item_Quality와Sellin_모두_0이상일때_CHECK() {
 
         int Quality = 3;
         int Sellin = 2;
@@ -37,7 +37,7 @@ public class DirtySampleTest {
     }
 
     @Test
-    public void 아이템이름이_세개_모두_아니고_item_Quality가_0이상이고_item_Sellin가_0이하일때_감소() {
+    public void 아이템이름이_세개_모두_아니고_item_Quality가_0이상이고_item_Sellin가_0이하일때_CHECK() {
         int satisfied_Quality = 3;
         int satisfied_Sellin = -1;
 
@@ -49,7 +49,7 @@ public class DirtySampleTest {
     }
 
     @Test
-    public void 아이템이름이_세개_모두_아니고_item_Quality가_0이하이고_item_Sellin가_0이상일때_감소() {
+    public void 아이템이름이_세개_모두_아니고_item_Quality가_0이하이고_item_Sellin가_0이상일때_CHECK() {
         int satisfied_Quality = -1;
         int satisfied_Sellin = 2;
 
@@ -61,7 +61,7 @@ public class DirtySampleTest {
     }
 
     @Test
-    public void 아이템이름이_세개_모두_아니고_item_Quality와item_Sellin가_0이하일때_감소() {
+    public void 아이템이름이_세개_모두_아니고_item_Quality와item_Sellin가_0이하일때_CHECK() {
         int satisfied_Quality = -2;
         int satisfied_Sellin = -2;
 
@@ -72,7 +72,17 @@ public class DirtySampleTest {
         assertThat(satisfied_items[0].getSellIn(), is(-3));
     }
 
-    
+    @Test
+    public void 아이템이름이_Sulfuras이라면_Sellin_AND_Quality_변화없으면_TRUE() {
+        int satisfied_Quality = 3;
+        int satisfied_Sellin = 3;
+
+        Item[] satisfied_items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, Sulfuras);
+        DirtySample satisfied_dirtySample = DirtySample.builder().items(satisfied_items).build();
+        satisfied_dirtySample.updateQuality();
+        assertThat(satisfied_items[0].getQuality(), is(satisfied_Quality));
+        assertThat(satisfied_items[0].getSellIn(), is(satisfied_Sellin));
+    }
 
     @Test
     public void 아이템_이름이_셋다아니고_quality가0보다크고_sellin이_0보다클때_N번반복() {
