@@ -25,12 +25,12 @@ public class DirtySampleTest {
         Item[] items = makeNewItemLists(initialQuality, initialSellin, BackStage);
         DirtySample dirtySample = DirtySample.builder().items(items).build();
         // Step Check
-        int check = initialQuality;
+        int checkQualityEachStage = initialQuality;
         for(int loop = 1; loop <= loopFifty; loop++)
         {
             dirtySample.updateQuality();
-            check = basicBackstageLogic(items[0], check);
-            assertThat(items[0].getQuality(), equalTo(check));
+            checkQualityEachStage = basicBackstageLogic(items[0], checkQualityEachStage);
+            assertThat(items[0].getQuality(), equalTo(checkQualityEachStage));
         }
         // Result Check
         assertThat(items[0].getQuality(),equalTo(definedQualityMin));
@@ -38,18 +38,18 @@ public class DirtySampleTest {
     }
 
     @Test
-    public void 아이템_이름이_Backstage이고_quality가50보다클때_50번반복() {
+    public void 아이템_이름이_Backstage이고_quality가50보다크고_Sellin이11보다클때_50번반복() {
         int initialQuality = 100;
         int initialSellin = 20;
         Item[] items = makeNewItemLists(initialQuality, initialSellin, BackStage);
         DirtySample dirtySample = DirtySample.builder().items(items).build();
         // Step Check
-        int check = initialQuality;
+        int checkQualityEachStage = initialQuality;
         for(int loop = 1; loop <= loopFifty; loop++)
         {
             dirtySample.updateQuality();
-            check = basicBackstageLogic(items[0], check);
-            assertThat(items[0].getQuality(), equalTo(check));
+            checkQualityEachStage = basicBackstageLogic(items[0], checkQualityEachStage);
+            assertThat(items[0].getQuality(), equalTo(checkQualityEachStage));
         }
         // Result Check
         assertThat(items[0].getQuality(),equalTo(definedQualityMin));
