@@ -14,77 +14,101 @@ public class DirtySampleTest {
 
     // Loop
     int loopFifty = 50;
+    int Max_Count = 100;
 
     // Quality
     int definedQualityMax = 50;
     int definedQualityMin = 0;
 
-    int sellInOver1 = 5;
-    int qualityUnder50 = 40;
-    int qualityOver50 = 51;
-    int negativeSellIn = -1;
+    int sellInOver1 = ((int) (Math.random() * definedQualityMax) +1);
+    int qualityUnder50 = ((int) (Math.random() * 2 * definedQualityMax) - 51);
+    int qualityOver50 = ((int) (Math.random() * definedQualityMax) + 50);
+    int negativeSellIn = ((int) (Math.random()*-50)-1 );
 
     @Test
     public void 아이템이름이_세개_모두_아니고_item_Quality와Sellin_모두_1이상일때_CHECK() {
 
-        int satisfied_Quality = ((int) (Math.random() * definedQualityMax) + 1); // 1 ~ 50 사이의 난수 생성
-        int satisfied_Sellin = ((int) (Math.random() * definedQualityMax) + 1); // 1 ~ 50 사이의 난수 생성
+        for (int i=1; i< Max_Count; i++) {
+            int satisfied_Quality =  ((int) (Math.random() * definedQualityMax) + 1);
+            int satisfied_Sellin = ((int) (Math.random() * definedQualityMax) + 1);
 
-        Item[] items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, NotThreeDefault);
-        DirtySample dirtySample = DirtySample.builder().items(items).build();
-        dirtySample.updateQuality();
+            Item[] items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, NotThreeDefault);
+            DirtySample dirtySample = DirtySample.builder().items(items).build();
+            dirtySample.updateQuality();
 
-        assertThat(items[0].getQuality(), is(satisfied_Quality - 1));
-        assertThat(items[0].getSellIn(), is(satisfied_Sellin - 1));
+            assertThat(items[0].getQuality(), is(satisfied_Quality - 1));
+
+        }
+
     }
 
 
     @Test
-    public void 아이템이름이_세개_모두_아니고_item_Quality가_0이상이고_item_Sellin가_0이하일때_CHECK() {
-        int satisfied_Quality = ((int) (Math.random() * definedQualityMax) + 1); // 0 ~ 50 난수
-        int satisfied_Sellin = ((int) (-Math.random() * definedQualityMax) + 1); //-50 ~ 0 난수
 
-        Item[] satisfied_items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, NotThreeDefault);
-        DirtySample satisfied_dirtySample = DirtySample.builder().items(satisfied_items).build();
-        satisfied_dirtySample.updateQuality();
-        assertThat(satisfied_items[0].getQuality(), is(satisfied_Quality - 2));
-        assertThat(satisfied_items[0].getSellIn(), is(satisfied_Sellin - 1));
+    public void 아이템이름이_세개_모두_아니고_item_Quality가_0이하이고_item_Sellin가_1이상일때_CHECK() {
+        for (int i=1; i< Max_Count; i++) {
+            int satisfied_Quality = ((int) (-Math.random() * definedQualityMax) -1); // -50~ 0 사이의 난수 생성
+            int satisfied_Sellin = ((int) (Math.random() * definedQualityMax) + 1); // 1~ 50 사이의 난수 생성
+
+            Item[] satisfied_items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, NotThreeDefault);
+            DirtySample satisfied_dirtySample = DirtySample.builder().items(satisfied_items).build();
+            satisfied_dirtySample.updateQuality();
+            assertThat(satisfied_items[0].getQuality(), is(satisfied_Quality));
+        }
     }
 
     @Test
-    public void 아이템이름이_세개_모두_아니고_item_Quality가_0이하이고_item_Sellin가_0이상일때_CHECK() {
-        int satisfied_Quality = ((int) (-Math.random() * definedQualityMax) + 1); // -50~ 0 사이의 난수 생성
-        int satisfied_Sellin = ((int) (Math.random() * definedQualityMax) + 1); // 1~ 50 사이의 난수 생성
+    public void 아이템이름이_세개_모두_아니고_item_Quality가_2이상이고_item_Sellin가_0이하일때_CHECK() {
+        for (int i=1; i< Max_Count; i++) {
+            int satisfied_Quality = ((int) (Math.random() * definedQualityMax) + 3); // 2 ~ 50 난수
+            int satisfied_Sellin = ((int) (-Math.random() * definedQualityMax) - 1); //-50 ~ 0 난수
 
-        Item[] satisfied_items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, NotThreeDefault);
-        DirtySample satisfied_dirtySample = DirtySample.builder().items(satisfied_items).build();
-        satisfied_dirtySample.updateQuality();
-        assertThat(satisfied_items[0].getQuality(), is(satisfied_Quality));
-        assertThat(satisfied_items[0].getSellIn(), is(satisfied_Sellin - 1));
+            Item[] satisfied_items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, NotThreeDefault);
+            DirtySample satisfied_dirtySample = DirtySample.builder().items(satisfied_items).build();
+            satisfied_dirtySample.updateQuality();
+            assertThat(satisfied_items[0].getQuality(), is(satisfied_Quality - 2));
+        }
     }
 
     @Test
-    public void 아이템이름이_세개_모두_아니고_item_Quality와item_Sellin가_0이하일때_CHECK() {
-        int satisfied_Quality = ((int) (-Math.random() * definedQualityMax) + 1); // -50~ 0 사이의 난수 생성
-        int satisfied_Sellin = ((int) (-Math.random() * definedQualityMax) + 1); // -50~ 0 사이의 난수 생성
+    public void 아이템이름이_세개_모두_아니고_item_Quality가_1이고_item_Sellin가_0이하일때_CHECK() {
+        for (int i=1; i< Max_Count; i++) {
+            int satisfied_Quality = 1; // 2 ~ 50 난수
+            int satisfied_Sellin = ((int) (-Math.random() * definedQualityMax) - 1); //-50 ~ 0 난수
 
-        Item[] satisfied_items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, NotThreeDefault);
-        DirtySample satisfied_dirtySample = DirtySample.builder().items(satisfied_items).build();
-        satisfied_dirtySample.updateQuality();
-        assertThat(satisfied_items[0].getQuality(), is(satisfied_Quality));
-        assertThat(satisfied_items[0].getSellIn(), is(satisfied_Sellin - 1));
+            Item[] satisfied_items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, NotThreeDefault);
+            DirtySample satisfied_dirtySample = DirtySample.builder().items(satisfied_items).build();
+            satisfied_dirtySample.updateQuality();
+            assertThat(satisfied_items[0].getQuality(), is(0));
+        }
+    }
+
+    @Test
+    public void 아이템이름이_세개_모두_아니고_item_Quality가_0이하이고_item_Sellin가_0이하일때_CHECK() {
+        for (int i=1; i< Max_Count; i++) {
+            int satisfied_Quality = ((int) (-Math.random() * definedQualityMax) - 1); // 2 ~ 50 난수
+            int satisfied_Sellin = ((int) (-Math.random() * definedQualityMax) - 1); //-50 ~ 0 난수
+
+            Item[] satisfied_items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, NotThreeDefault);
+            DirtySample satisfied_dirtySample = DirtySample.builder().items(satisfied_items).build();
+            satisfied_dirtySample.updateQuality();
+            assertThat(satisfied_items[0].getQuality(), is(satisfied_Quality));
+            assertThat(satisfied_items[0].getSellIn(), is(satisfied_Sellin-1));
+        }
     }
 
     @Test
     public void 아이템이름이_Sulfuras이라면_Sellin_AND_Quality_변화없으면_TRUE() {
-        int satisfied_Quality = ((int) (Math.random() * 2 * definedQualityMax) - 50);  // -50~ 50 사이의 난수 생성
-        int satisfied_Sellin = ((int) (Math.random() * 2 * definedQualityMax) - 50); // -50~ 50 사이의 난수 생성
+        for (int i=1; i< Max_Count; i++) {
+            int satisfied_Quality = ((int) (Math.random() * 2 * definedQualityMax) - 50);  // -50~ 50 사이의 난수 생성
+            int satisfied_Sellin = ((int) (Math.random() * 2 * definedQualityMax) - 50); // -50~ 50 사이의 난수 생성
 
-        Item[] satisfied_items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, Sulfuras);
-        DirtySample satisfied_dirtySample = DirtySample.builder().items(satisfied_items).build();
-        satisfied_dirtySample.updateQuality();
-        assertThat(satisfied_items[0].getQuality(), is(satisfied_Quality));
-        assertThat(satisfied_items[0].getSellIn(), is(satisfied_Sellin));
+            Item[] satisfied_items = makeNewItemLists(satisfied_Quality, satisfied_Sellin, Sulfuras);
+            DirtySample satisfied_dirtySample = DirtySample.builder().items(satisfied_items).build();
+            satisfied_dirtySample.updateQuality();
+            assertThat(satisfied_items[0].getQuality(), is(satisfied_Quality));
+            assertThat(satisfied_items[0].getSellIn(), is(satisfied_Sellin));
+        }
     }
 
     @Test
